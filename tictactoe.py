@@ -1,0 +1,336 @@
+from copy import copy, deepcopy
+import random
+import math
+
+"""
+Board is a 3x3 grid of 3x3 grids.
+
+board_single = [[0,0,0],
+                [0,0,0],
+                [0,0,0]]
+
+
+board = [[deepcopy(board_single), deepcopy(board_single), deepcopy(board_single)],
+         [deepcopy(board_single), deepcopy(board_single), deepcopy(board_single)],
+         [deepcopy(board_single), deepcopy(board_single), deepcopy(board_single)]]
+
+So examining the above board:
+    - board[0][0] is the top left board
+    - board[0][1] is the middle top board
+    - board[0][2] is the top right board
+    - board[2][0] is the bottom left board
+    Each of these return a 3x3 grid with 
+        - grid[0][1] is the top middle element
+
+    So overall it is:
+        board[vertical_board][horizontal_board][board_y-axis][board_x-axis]
+
+"""
+
+
+
+# creates an instance of an ultimate tic-tac-toe game
+# represents the game state as a 2-d array of 2-d arrays.
+# has certain aspects to the game state:
+#   - current board state
+#   - current player's turn
+
+
+# '| - - - | - - - | - - - |'
+
+
+
+# Represents one board of Tic Tac Toe. Stores certain metrics on the board state
+class Board(object):
+    """ A standard 3x3 tictactoe board """
+    def __init__(self):
+        self.board = [[2,2,2],
+                      [2,2,2],
+                      [2,2,2]]
+        self.__init_spots()
+        self.__init_winnable_states()
+        self.winner = None
+
+    # Initialize the board object storing the moves each player has made on the board
+    def __init_spots(self):
+        # initialize the open spots for the entire board
+        self.open_spots = []
+        for i in range(3):
+            for j in range(3):
+                self.open_spots.append([i,j])
+        # taken spots by player 1 and player 2
+        self.p0_spots = []
+        self.p1_spots = []
+
+    # creates the winnable states for both players
+    def __init_winnable_states(self):
+        self.p0_winnable_states = self.__create_all_states()
+        self.p1_winnable_states = self.__create_all_states()
+
+    # returns the winnable states for a person playing
+    def __create_all_states(self):
+        states = []
+        for vert in range(3):
+            winnable = []
+            for hor in range(3):
+                winnable.append([vert, hor])
+            states.append(winnable)
+        for hor in range(3):
+            winnable = []
+            for vert in range(3):
+                winnable.append([vert, hor])
+            states.append(winnable)
+        winnable = []
+        for i in range(3):
+            winnable.append([i,i])
+        states.append(winnable)
+        winnable = []
+        for i in range(3):
+            winnable.append([2 - i, i])
+        states.append(winnable)
+        return states
+
+    # updates the winnable states after someone makes a move
+    def __update_winnable_states(self, location, player):
+        if player == 0:
+            for state in self.p0_winnable_states:
+                if location in state:
+                    state.remove(location)
+                if len(state) == 0 and self.winner is None:
+                    self.winner = 0
+            to_remove = []
+            for state in self.p1_winnable_states:
+                if location in state:
+                    to_remove.append(state)
+            for item in to_remove:
+                self.p1_winnable_states.remove(item)
+        if player == 1:
+            for state in self.p1_winnable_states:
+                if location in state:
+                    state.remove(location)
+                if len(state) == 0 and self.winner is None:
+                    self.winner = 1
+            to_remove = []
+            for state in self.p0_winnable_states:
+                if location in state:
+                    to_remove.append(state)
+            for item in to_remove:
+                self.p0_winnable_states.remove(item)
+
+    # Mark an open spot 
+    def make_move(self, location, player):
+        assert location in self.open_spots
+        self.board[location[0]][location[1]] = player
+        self.open_spots.remove(location)
+        if player == 0:
+            self.p0_spots.append(location)
+        elif player == 1:
+            self.p1_spots.append(location)
+        self.__update_winnable_states(location, player)
+
+    # returns an array of arrays, which are the opening [vertical, horizontal] spots available on this board
+    def get_open_spots(self):
+        return self.open_spots
+
+    # returns the value being stored in the current location of the Board.
+    # 0 = player 0 claimed it, 1 = player 1 claimed it, 2 = unclaimed
+    def get_value(self, location):
+        return self.board[location[0]][location[1]]
+
+    def get_winner(self):
+        return self.winner
+
+
+
+# Defines a game of Ultimate Tic Tac Toe
+class Game(object):
+    """initializes a new game"""
+    def __init__(self, strat0 = None, strat1 = None):
+        # initialize the open spots for the board
+        self.open_spots = []
+        for i in range(3):
+            for j in range(3):
+                self.open_spots.append([i,j])
+        self.strat0 = strat0
+        self.strat1 = strat1
+        self.players_turn = round(random.random())
+        self.playing_board = [math.floor(3*random.random()), math.floor(3*random.random())]
+        self.__init_board()
+        self.__init_winnable_states()
+        self.winner = None
+
+    # initializes a new game board
+    def __init_board(self):
+        self.board = [[Board(), Board(), Board()],
+                      [Board(), Board(), Board()],
+                      [Board(), Board(), Board()]]
+
+    # used for printing game state
+    def __print_game_line(self):
+        print('|  -    -    -  |  -    -    -  |  -    -    -  |')
+
+    # returns the character that corresponds to the value stored in the game board array
+    def __get_character(self, value):
+        if value == 2:
+            return 'N'
+        elif value == 1:
+            return 'X'
+        elif value == 0:
+            return 'O'
+
+    # initialize the winnable states for the larger board
+    def __init_winnable_states(self):
+        self.p0_winnable_states = self.__create_all_states()
+        self.p1_winnable_states = self.__create_all_states()
+
+    # create the winnable states for the larger board
+    def __create_all_states(self):
+        states = []
+        for vert in range(3):
+            winnable = []
+            for hor in range(3):
+                winnable.append([vert, hor])
+            states.append(winnable)
+        for hor in range(3):
+            winnable = []
+            for vert in range(3):
+                winnable.append([vert, hor])
+            states.append(winnable)
+        winnable = []
+        for i in range(3):
+            winnable.append([i,i])
+        states.append(winnable)
+        winnable = []
+        for i in range(3):
+            winnable.append([2 - i, i])
+        states.append(winnable)
+        print(states)
+        return states
+
+    # updates the winnable states after someone makes a move
+    def __update_winnable_states(self, location, player):
+        if player == 0:
+            to_remove = []
+            # go through the possible ways to win and get rid of those options that use the 
+            # move that was just made
+            for state in self.p0_winnable_states:
+                if location in state:
+                    state.remove(location)
+                if len(state) == 0 and self.winner is None:
+                    self.winner = 0
+            to_remove = []
+            for state in self.p1_winnable_states:
+                if location in state:
+                    to_remove.append(state)
+            for item in to_remove:
+                self.p1_winnable_states.remove(item)
+        if player == 1:
+            for state in self.p1_winnable_states:
+                if location in state:
+                    state.remove(location)
+                if len(state) == 0 and self.winner is None:
+                    self.winner = 1
+            to_remove = []
+            for state in self.p0_winnable_states:
+                if location in state:
+                    to_remove.append(state)
+            for item in to_remove:
+                self.p0_winnable_states.remove(item)
+
+    # prints out the current game state
+    def print_board(self):
+        for vertical_board in range(3):
+            self.__print_game_line()
+            for vertical_index in range(3):
+                for horizontal_board in range(3):
+                    print('|', end='')
+                    for horizontal_index in range(3):
+                        print(' ', self.__get_character(self.board[vertical_board][horizontal_board].get_value([vertical_index, horizontal_index])), ' ', end='')
+                print('|')
+        self.__print_game_line()
+
+    # returns the current Board being played on
+    def get_current_board(self):
+        return self.board[self.playing_board[0]][self.playing_board[1]]
+
+    # returns the index of the Board being played on
+    def get_current_board_index(self):
+        return self.playing_board
+
+    # print the current Board being played on
+    def print_current_board(self):
+        current_board = self.get_current_board()
+        print('|  -    -    -  |')
+        for vertical in range(3):
+            print('|', end='')
+            for horizontal in range(3):
+                print(' ', self.__get_character(current_board.get_value([vertical, horizontal])), ' ', end='')
+            print('|')
+        print('|  -    -    -  |')
+
+    # make a move as the current player
+    def make_move(self, location, verbose = False):
+        old_val = self.winner
+        # print the state of the game after the move
+        if verbose:
+            print('My current board is: ', self.get_current_board_index())
+            print('I am making a move on index: ', location)
+        # ensure that the move can be made
+        assert location in self.get_current_board().get_open_spots()
+        # make the move that the player specified
+        self.get_current_board().make_move(location, self.players_turn)
+        if self.get_current_board().get_winner() is not None and self.get_current_board().get_winner() != old_val:
+            self.__update_winnable_states(self.get_current_board_index(), self.players_turn)
+        # remove the completed boards
+        if len(self.get_current_board().open_spots) == 0:
+            self.open_spots.remove(self.playing_board)
+        # check if the game was a tie
+        if len(self.open_spots) == 0 and self.winner is None:
+            print('The game was a tie.')
+            return 3
+        # check if someone has won the game
+        if self.winner is not None:
+            print('Player ', str(self.winner), ' won the game!')
+            return self.winner
+        # check if the board is complete and switch to the proper location
+        if location not in self.open_spots:
+            choice = math.floor(len(self.open_spots)*random.random())
+            self.playing_board = self.open_spots[choice]
+        else:
+            self.playing_board = copy(location)
+        # switch the player's turn
+        self.players_turn = abs(self.players_turn - 1)
+        return -1
+
+    # makes a move for the current player using their strategy
+    def make_move_strategy(self, verbose = False):
+        if self.players_turn == 0:
+            val = self.make_move(self.strat0.decide_move(self), verbose)
+            if verbose:
+                self.print_board()
+            return val
+        else:
+            val = self.make_move(self.strat1.decide_move(self), verbose)
+            if verbose:
+                self.print_board()
+            return val
+
+
+
+# Represents a strategy that one can perform in a game of ultimate tic tac toe
+class Strategy(object):
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    # make a move randomly
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('Making move randomly')
+        possible_moves = game.get_current_board().get_open_spots()
+        assert len(possible_moves) != 0 
+        move_index = math.floor(len(possible_moves)*random.random())
+        return possible_moves[move_index]
+
+
+
