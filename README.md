@@ -1,6 +1,6 @@
 # Project Title
 
-One Paragraph of project description goes here
+A project to simulate ultimate tic tac toe AI's against eachother.
 
 ## Getting Started
 
