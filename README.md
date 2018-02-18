@@ -4,10 +4,10 @@ A project to simulate ultimate tic tac toe AI's against eachother.
 
 ## Getting Started
 
-Pull the code with 
+Pull the code using an ssh key with... 
 
 ```
-git pull 
+git pull git@github.com:gdphale/ultimatetictactoe.git
 ```
 
 ### Prerequisites
