@@ -117,6 +117,15 @@ class Board(object):
             for item in to_remove:
                 self.p0_winnable_states.remove(item)
 
+    # get the winnable spots on this board for the given player
+    def get_winnable_spots(self, player):
+        if player == 0:
+            return self.p0_winnable_states
+        elif player == 1:
+            return self.p1_winnable_states
+        # should never hit here
+        return None
+
     # Mark an open spot 
     def make_move(self, location, player):
         assert location in self.open_spots
@@ -145,7 +154,7 @@ class Board(object):
 # Defines a game of Ultimate Tic Tac Toe
 class Game(object):
     """initializes a new game"""
-    def __init__(self, strat0 = None, strat1 = None):
+    def __init__(self, strat0 = None, strat1 = None, goes_first=None):
         # initialize the open spots for the board
         self.open_spots = []
         for i in range(3):
@@ -153,7 +162,10 @@ class Game(object):
                 self.open_spots.append([i,j])
         self.strat0 = strat0
         self.strat1 = strat1
-        self.players_turn = round(random.random())
+        if goes_first is None:
+            self.players_turn = round(random.random())
+        else:
+            self.players_turn = goes_first
         self.playing_board = [math.floor(3*random.random()), math.floor(3*random.random())]
         self.__init_board()
         self.__init_winnable_states()
@@ -204,7 +216,6 @@ class Game(object):
         for i in range(3):
             winnable.append([2 - i, i])
         states.append(winnable)
-        print(states)
         return states
 
     # updates the winnable states after someone makes a move
@@ -236,6 +247,14 @@ class Game(object):
                     to_remove.append(state)
             for item in to_remove:
                 self.p0_winnable_states.remove(item)
+
+    # get who's turn it is, player 0 or 1
+    def get_current_player_turn(self):
+        return self.players_turn
+
+    # get the player who currently isn't playing
+    def get_other_player_turn(self):
+        return abs(self.get_current_player_turn() - 1)
 
     # prints out the current game state
     def print_board(self):
@@ -286,11 +305,13 @@ class Game(object):
             self.open_spots.remove(self.playing_board)
         # check if the game was a tie
         if len(self.open_spots) == 0 and self.winner is None:
-            print('The game was a tie.')
+            if verbose:
+                print('The game was a tie.')
             return 3
         # check if someone has won the game
         if self.winner is not None:
-            print('Player ', str(self.winner), ' won the game!')
+            if verbose:
+                print('Player ', str(self.winner), ' won the game!')
             return self.winner
         # check if the board is complete and switch to the proper location
         if location not in self.open_spots:
@@ -299,7 +320,7 @@ class Game(object):
         else:
             self.playing_board = copy(location)
         # switch the player's turn
-        self.players_turn = abs(self.players_turn - 1)
+        self.players_turn = self.get_other_player_turn()
         return -1
 
     # makes a move for the current player using their strategy
@@ -314,23 +335,4 @@ class Game(object):
             if verbose:
                 self.print_board()
             return val
-
-
-
-# Represents a strategy that one can perform in a game of ultimate tic tac toe
-class Strategy(object):
-    """docstring for ClassName"""
-    def __init__(self):
-        return None
-    
-    # make a move randomly
-    def decide_move(self, game, verbose = False):
-        if verbose:
-            print('Making move randomly')
-        possible_moves = game.get_current_board().get_open_spots()
-        assert len(possible_moves) != 0 
-        move_index = math.floor(len(possible_moves)*random.random())
-        return possible_moves[move_index]
-
-
 
