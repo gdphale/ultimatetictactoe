@@ -12,51 +12,18 @@ git pull git@github.com:gdphale/ultimatetictactoe.git
 
 ### Prerequisites
 
-python3
-```
-Give examples
-```
+python3.6.3
 
-### Installing
 
-A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
+### Current Strategies
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-python3 simulate.py
-```
-
-## Requirements
-
-python3
-
+strategies are...
+#       RandomStrat() - choose a place on the current board
+#       NoCenterStrat() - don't move to the center if possible
+#       WinCurBoardStrat() - if there is a spot open on the current board to win, place there
+#       BlockOpponentStrat() - if your opponent is about to win the current board block them
+#       WinThenBlockStrat() - first try and win the curreny board you are platying on, then block the opponent
+#       WinThenNoCenterStrat() - first try and win the current board, then if not possible move somewhere randomly that is not the center
+#       WinCurBoardAdvancedStrat() - first try and win the current board, then try and setup your next turn to win the board
 
