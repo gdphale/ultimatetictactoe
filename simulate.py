@@ -27,7 +27,7 @@ def simulate_game(g):
 
 
 def monte_carlo(x):
-    player0wins = 0;
+    player0wins = 0
     player1wins = 0
     ties = 0
     for _ in range(x):
