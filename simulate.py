@@ -1,5 +1,9 @@
+#!/usr/local/bin/python3
+
 from tictactoe import *
 from strategies import *
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 # define the strats to be run with
@@ -14,18 +18,19 @@ from strategies import *
 #       WinCurBoardAdvancedStrat() - first try and win the current board, then try and setup your next turn to win the board
 #
 
-strat0 = WinCurBoardStrat()
+strat0 = NoCenterStrat()
 strat1 = RandomStrat()
 
 
 # make moves over and over until the game ends. A return value of -1 from the game means the game is not complete
-def simulate_game(g):
+def simulate_game(g, verbose):
     for _ in range(100):
-        numb = g.make_move_strategy(verbose = False)
+        numb = g.make_move_strategy(verbose = verbose)
         if numb != -1:
             return numb
 
 
+# returns a dictionary with the different win percentages for strategies
 def monte_carlo(x):
     player0wins = 0
     player1wins = 0
@@ -33,7 +38,7 @@ def monte_carlo(x):
     for _ in range(x):
         # the strategy class is the first strategy made. It simply chooses a random point to go to
         g = Game(strat0 = strat0, strat1 = strat1)
-        result = simulate_game(g)
+        result = simulate_game(g, False)
         if result == 0:
             player0wins = player0wins + 1
         elif result == 1:
@@ -47,6 +52,7 @@ def monte_carlo(x):
     return values
 
 
+# print out the results after running monte carlo simuation x times
 def print_monte_carlo(x):
     values = monte_carlo(x)
     print('Player 0 win percentage: ', str(values['P0Win']))
@@ -54,4 +60,37 @@ def print_monte_carlo(x):
     print('Tie percentage: ', str(values['Ties']))
 
 
+# graph the win, lose, and tie percentages for the strategies pinned against eachother
+def graph_multiple_monte_carlo(game_runs=1000, monte_carlo_runs=50):
+    a = {}
+    a['P0Win'] = []
+    a['P1Win'] = []
+    a['Ties'] = []
+    # simulate the games
+    for j in range(monte_carlo_runs):
+        result = monte_carlo(game_runs)
+        a['P0Win'].append(result['P0Win'])
+        a['P1Win'].append(result['P1Win'])
+        a['Ties'].append(result['Ties'])
+    # plot the distributions of the different player's win's
+    for key in a:
+        h = np.histogram(a[key], bins=11)
+        edges = h[1]
+        heights = h[0]
+        centers = []
+        # get the centers from the edges returned from histogram function
+        for j in range(len(edges) - 1):
+            centers.append( (edges[j] + edges[j+1])/2  )
+        plt.bar(centers, heights, width = (edges[1] - edges[0])/2, alpha=0.5 )
+    plt.show()
+
+
+#g = Game(strat0 = strat0, strat1 = strat1)
+#simulate_game(g, verbose = True)
+
+
 print_monte_carlo(10000)
+
+#graph_multiple_monte_carlo(game_runs=1000, monte_carlo_runs=120)
+
+
