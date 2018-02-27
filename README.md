@@ -30,4 +30,14 @@ strategies are...
 
 ### Win Percentages
 
-Matchup: 
+Matchups:
+
+For: player0=RandomStrat, player1=NoCenterStrat
+```
+Mean of player 0 wins is:  0.506255
+StdDev of player 0 wins is:  0.00473003964043
+Mean of player 1 wins is:  0.294336
+StdDev of player 1 wins is:  0.00465363341917
+Mean of ties is:  0.199409
+StdDev of ties is:  0.00416242945886
+```
