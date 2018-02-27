@@ -28,3 +28,6 @@ strategies are...
 *       NoCornersStrat() - move randomly that isn't the corners
 *       WinThenNoCornersStrat() - first try and win any board, if we can't then make a move that is not in a corner
 
+### Win Percentages
+
+Matchup: 
