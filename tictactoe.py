@@ -276,6 +276,8 @@ class Game(object):
 
     # returns the index of the Board being played on
     def get_current_board_index(self):
+        if self.move_anywhere:
+            return None
         return self.playing_board
 
     # print the current Board being played on

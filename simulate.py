@@ -18,8 +18,9 @@ import numpy as np
 #       WinCurBoardAdvancedStrat() - first try and win the current board, then try and setup your next turn to win the board
 #
 
-strat0 = NoCenterStrat()
-strat1 = RandomStrat()
+
+strat0 = WinThenNoCornersStrat()
+strat1 = WinAnyBoardStrat()
 
 
 # make moves over and over until the game ends. A return value of -1 from the game means the game is not complete
