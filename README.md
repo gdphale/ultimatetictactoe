@@ -51,3 +51,13 @@ StdDev of player 1 wins is:  0.00321802097569
 Mean of ties is:  0.085009
 StdDev of ties is:  0.00260557460074
 ```
+
+For: player0=NoCorners, player1=Random
+```
+Mean of  No Corners  wins is:  0.243091
+StdDev of  No Corners  wins is:  0.00400397539952
+Mean of  Random  wins is:  0.669355
+StdDev of  No Corners  wins is:  0.00452847380472
+Mean of ties is:  0.087554
+StdDev of ties is:  0.00248146811384
+```
