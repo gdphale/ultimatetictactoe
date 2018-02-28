@@ -71,3 +71,13 @@ StdDev of  Win Board  wins is:  0.00323391774787
 Mean of ties is:  0.034595
 StdDev of ties is:  0.00198923980455
 ```
+
+For: player0=WinAnyBoard, player1=WinThenNoCenter
+```
+Mean of  Win Board  wins is:  0.457647
+StdDev of  Win Board  wins is:  0.00472248779776
+Mean of  Win then No Center  wins is:  0.436746
+StdDev of  Win Board  wins is:  0.0046335390362
+Mean of ties is:  0.105607
+StdDev of ties is:  0.00290135330493
+```
