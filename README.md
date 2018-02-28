@@ -41,3 +41,13 @@ StdDev of player 1 wins is:  0.00465363341917
 Mean of ties is:  0.199409
 StdDev of ties is:  0.00416242945886
 ```
+
+For: player0=WinningStrat, player1=Random
+```
+Mean of player 0 wins is:  0.81492
+StdDev of player 0 wins is:  0.00413129519642
+Mean of player 1 wins is:  0.100071
+StdDev of player 1 wins is:  0.00321802097569
+Mean of ties is:  0.085009
+StdDev of ties is:  0.00260557460074
+```
