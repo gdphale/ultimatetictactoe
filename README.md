@@ -73,6 +73,16 @@ Mean of ties is:  0.085009
 StdDev of ties is:  0.00260557460074
 ```
 
+For: player0=WinNoCenters, player1=WinNoCorners
+```
+Mean of  Win then No Center  wins is:  0.847726
+StdDev of  Win then No Center  wins is:  0.00406796312668
+Mean of  Win then No Corners  wins is:  0.110197
+StdDev of  Win then No Center  wins is:  0.00328443160988
+Mean of ties is:  0.042077
+StdDev of ties is:  0.00210973244749
+```
+
 
 For: player0=WinAnyBoard, player1=WinAnyBoardThenNoCorners
 ```
