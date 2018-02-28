@@ -64,7 +64,7 @@ Mean of ties is:  0.108155
 StdDev of ties is:  0.00276782857128
 ```
 
-###### Winning Strategies + Basic Variations
+###### Winning Strategies vs Basic Variations
 
 For: player0=WinningStrat, player1=Random
 ```
@@ -75,6 +75,8 @@ StdDev of player 1 wins is:  0.00321802097569
 Mean of ties is:  0.085009
 StdDev of ties is:  0.00260557460074
 ```
+
+###### Winning Strategies vs Winning Strategies
 
 For: player0=WinNoCenters, player1=WinNoCorners
 ```
