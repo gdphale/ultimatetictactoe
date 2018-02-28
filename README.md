@@ -30,8 +30,7 @@ strategies are...
 
 ### Win Percentages
 
-Basic Variations
------------
+###### Basic Variations
 
 Matchups:
 
@@ -65,8 +64,7 @@ Mean of ties is:  0.108155
 StdDev of ties is:  0.00276782857128
 ```
 
-Winning Strategies + Basic Variations
-------------
+###### Winning Strategies + Basic Variations
 
 For: player0=WinningStrat, player1=Random
 ```
