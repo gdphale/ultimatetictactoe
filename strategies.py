@@ -22,6 +22,9 @@ class RandomStrat(object):
         # first check if you can move anywhere on the board, then randomly choose a board
         return make_move_random(game)
 
+    def __str__(self):
+        return 'Random'
+
 
 # If the current board has the center open, don't move there. But we dooo want to play on the middle board if we are allowed to choose our boards
 class NoCenterStrat():
@@ -34,6 +37,9 @@ class NoCenterStrat():
             print('Not choosing middle if possible')
         # first check if you can choose the board to move to, if possible choose the middle board, since this strategy wants to win the middle board
         return make_move_center(game)
+
+    def __str__(self):
+        return 'No Center'
 
 
 # search through the boards and
@@ -52,6 +58,9 @@ class WinAnyBoardStrat():
         # if we can't make a move randomly
         return make_move_random(game)
 
+    def __str__(self):
+        return 'Win Board'
+
 
 # if your opponent is about to win, block them
 class BlockOpponentStrat():
@@ -68,6 +77,9 @@ class BlockOpponentStrat():
             return result
         # if that doesnt work then simply choose randomly
         return make_move_random(game)
+
+    def __str__(self):
+        return 'Block'
 
 
 
@@ -91,6 +103,9 @@ class WinThenBlockStrat():
         # if neither of the above is satisfied then we move randomly
         return make_move_random(game)
 
+    def __str__(self):
+        return 'Win then Block'
+
 
 # firs try and win the current board then move somewhere randomly that is not the center
 class WinThenNoCenterStrat():
@@ -108,6 +123,9 @@ class WinThenNoCenterStrat():
         # then try and move to the center
         return make_move_center(game)
 
+    def __str__(self):
+        return 'Win then No Center'
+
 
 # try and move only to center and corners on boards if possible
 class NoCornersStrat():
@@ -124,6 +142,9 @@ class NoCornersStrat():
             return result
         # then try and move to the center
         return make_move_random(game)
+
+    def __str__(self):
+        return 'No Corners'
 
 
 # first try and win a board then focus on no corners
@@ -145,6 +166,10 @@ class WinThenNoCornersStrat():
             return result
         # then try and move to the center
         return make_move_random(game)
+
+    def __str__(self):
+        return 'Win then No Corners'
+
 
 
 """

@@ -19,8 +19,8 @@ import numpy as np
 #
 
 
-strat0 = WinThenNoCornersStrat()
-strat1 = WinAnyBoardStrat()
+strat0 = WinAnyBoardStrat()
+strat1 = RandomStrat()
 
 
 # make moves over and over until the game ends. A return value of -1 from the game means the game is not complete
@@ -82,7 +82,17 @@ def graph_multiple_monte_carlo(game_runs=1000, monte_carlo_runs=50):
         # get the centers from the edges returned from histogram function
         for j in range(len(edges) - 1):
             centers.append( (edges[j] + edges[j+1])/2  )
-        plt.bar(centers, heights, width = (edges[1] - edges[0])/2, alpha=0.5 )
+        plt.bar(centers, heights, width = (edges[1] - edges[0])/2, alpha=0.5, label=str(key))
+    print('Mean of player 0 wins is: ', np.mean(a['P0Win']))
+    print('StdDev of player 0 wins is: ', np.std(a['P0Win']))
+    print('Mean of player 1 wins is: ', np.mean(a['P1Win']))
+    print('StdDev of player 1 wins is: ', np.std(a['P1Win']))
+    print('Mean of ties is: ', np.mean(a['Ties']))
+    print('StdDev of ties is: ', np.std(a['Ties']))
+    plt.xlabel('Percentage')
+    plt.ylabel('Count')
+    plt.title('Histogram of outcomes, ' + str(strat0,) + ' vs ' + str(strat1))
+    plt.legend()
     plt.show()
 
 
@@ -90,8 +100,8 @@ def graph_multiple_monte_carlo(game_runs=1000, monte_carlo_runs=50):
 #simulate_game(g, verbose = True)
 
 
-print_monte_carlo(10000)
+#print_monte_carlo(10000)
 
-#graph_multiple_monte_carlo(game_runs=1000, monte_carlo_runs=120)
+graph_multiple_monte_carlo(game_runs=10000, monte_carlo_runs=100)
 
 
