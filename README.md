@@ -61,3 +61,13 @@ StdDev of  No Corners  wins is:  0.00452847380472
 Mean of ties is:  0.087554
 StdDev of ties is:  0.00248146811384
 ```
+
+For: player0=WinAnyBoard, player1=WinAnyBoardThenNoCorners
+```
+Mean of  Win Board  wins is:  0.852629
+StdDev of  Win Board  wins is:  0.00372059927969
+Mean of  Win then No Corners  wins is:  0.112776
+StdDev of  Win Board  wins is:  0.00323391774787
+Mean of ties is:  0.034595
+StdDev of ties is:  0.00198923980455
+```
