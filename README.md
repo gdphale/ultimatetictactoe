@@ -34,6 +34,16 @@ strategies are...
 
 Matchups:
 
+For: player0=RandomStrat, player1=RandomStrat
+```
+Mean of player 0 wins is:  0.389978
+StdDev of player 0 wins is:  0.00408677329931573
+Mean of player 1 wins is:  0.3886470000000001
+StdDev of player 1 wins is:  0.004453413409958706
+Mean of ties is:  0.221375
+StdDev of ties is:  0.0036228545375159623
+```
+
 For: player0=RandomStrat, player1=NoCenterStrat
 ```
 Mean of player 0 wins is:  0.506255
