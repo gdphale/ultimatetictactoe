@@ -96,6 +96,15 @@ Mean of ties is:  0.08902
 StdDev of ties is:  0.00302271401227
 ```
 
+For: p0=WinThenBlockNoCenter, p1=Random
+```
+Mean of  Win then Block No Center  wins is:  0.877391
+StdDev of  Win then Block No Center  wins is:  0.00307977580353
+Mean of  Random  wins is:  0.036028
+StdDev of  Win then Block No Center  wins is:  0.0017789367611
+Mean of ties is:  0.086581
+StdDev of ties is:  0.00293184907524
+```
 
 ###### Winning Strategies vs Winning Strategies
 
