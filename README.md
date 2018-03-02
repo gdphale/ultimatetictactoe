@@ -76,6 +76,17 @@ Mean of ties is:  0.085009
 StdDev of ties is:  0.00260557460074
 ```
 
+For: p0=WinThenNoCenter, p1=Random
+```
+Mean of  Win then No Center  wins is:  0.805118
+StdDev of  Win then No Center  wins is:  0.00441586639291
+Mean of  Random  wins is:  0.09763
+StdDev of  Win then No Center  wins is:  0.00281902465402
+Mean of ties is:  0.097252
+StdDev of ties is:  0.00290046479034
+```
+
+
 ###### Winning Strategies vs Winning Strategies
 
 For: player0=WinNoCenters, player1=WinNoCorners
