@@ -233,3 +233,14 @@ StdDev of  Win then Block No Center  wins is:  0.00483658753668
 Mean of ties is:  0.249189
 StdDev of ties is:  0.00424694937573
 ```
+
+For: p0=WinBoard, p1=WinBlock
+```
+Mean of  Win Board  wins is:  0.250066
+StdDev of  Win Board  wins is:  0.00483638749481
+Mean of  Win then Block  wins is:  0.63175
+StdDev of  Win Board  wins is:  0.00526267042479
+Mean of ties is:  0.118184
+StdDev of ties is:  0.00313230649841
+```
+
