@@ -64,7 +64,7 @@ Mean of ties is:  0.108155
 StdDev of ties is:  0.00276782857128
 ```
 
-###### Winning Strategies vs Random
+###### All other Strategies vs Random
 
 For: player0=WinningStrat, player1=Random
 ```
@@ -104,6 +104,16 @@ Mean of player 1 wins is:  0.097518
 StdDev of player 1 wins is:  0.0033102078484590655
 Mean of ties is:  0.3396080000000001
 StdDev of ties is:  0.005009205126564492
+```
+
+For: p0=BlockNoCenter, p1=Random
+```
+Mean of  Block No Center  wins is:  0.560494
+StdDev of  Block No Center  wins is:  0.00527469089142
+Mean of  Random  wins is:  0.117388
+StdDev of  Block No Center  wins is:  0.0036149766251
+Mean of ties is:  0.322118
+StdDev of ties is:  0.00490331275772
 ```
 
 For: p0=WinThenBlock, p1=Random
