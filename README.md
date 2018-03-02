@@ -96,6 +96,26 @@ Mean of ties is:  0.08902
 StdDev of ties is:  0.00302271401227
 ```
 
+For: p0=Block, p1=Random
+```
+Mean of player 0 wins is:  0.5628740000000001
+StdDev of player 0 wins is:  0.005323450384853792
+Mean of player 1 wins is:  0.097518
+StdDev of player 1 wins is:  0.0033102078484590655
+Mean of ties is:  0.3396080000000001
+StdDev of ties is:  0.005009205126564492
+```
+
+For: p0=WinThenBlock, p1=Random
+```
+Mean of player 0 wins is:  0.8832449999999998
+StdDev of player 0 wins is:  0.003366760312228955
+Mean of player 1 wins is:  0.038404
+StdDev of player 1 wins is:  0.0018559590512724144
+Mean of ties is:  0.078351
+StdDev of ties is:  0.0026750885966636694
+```
+
 For: p0=WinThenBlockNoCenter, p1=Random
 ```
 Mean of  Win then Block No Center  wins is:  0.877391
