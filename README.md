@@ -116,6 +116,17 @@ Mean of ties is:  0.322118
 StdDev of ties is:  0.00490331275772
 ```
 
+For: p0-BlockNoCorners, p1=Random
+```
+Mean of  Block No Corners  wins is:  0.449725
+StdDev of  Block No Corners  wins is:  0.00487976177697
+Mean of  Random  wins is:  0.244235
+StdDev of  Block No Corners  wins is:  0.00372455030843
+Mean of ties is:  0.30604
+StdDev of ties is:  0.00438136964887
+```
+
+
 For: p0=WinThenBlock, p1=Random
 ```
 Mean of player 0 wins is:  0.8832449999999998
