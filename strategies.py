@@ -10,6 +10,8 @@ Classes to be used with tictactoe
 """
 
 
+################### Basic Strategies
+
 # Represents a strategy that one can perform in a game of ultimate tic tac toe
 class RandomStrat(object):
     """docstring for ClassName"""
@@ -42,6 +44,28 @@ class NoCenterStrat():
         return 'No Center'
 
 
+# try and move only to center and corners on boards if possible
+class NoCornersStrat():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('Not choosing middle if possible')
+        # first try and win the current board
+        result = take_middles_and_center(game)
+        if result is not None:
+            return result
+        # then try and move to the center
+        return make_move_random(game)
+
+    def __str__(self):
+        return 'No Corners'
+
+
+#################### Stategies that try to win
+
 # search through the boards and
 class WinAnyBoardStrat():
     """docstring for ClassName"""
@@ -62,50 +86,6 @@ class WinAnyBoardStrat():
         return 'Win Board'
 
 
-# if your opponent is about to win, block them
-class BlockOpponentStrat():
-    """docstring for ClassName"""
-    def __init__(self):
-        return None
-    
-    def decide_move(self, game, verbose = False):
-        if verbose:
-            print('We will try and block the opponents win.')
-        # first try and block the opponent on a board they are about to win
-        result = block_opponent(game)
-        if result is not None:
-            return result
-        # if that doesnt work then simply choose randomly
-        return make_move_random(game)
-
-    def __str__(self):
-        return 'Block'
-
-
-
-# first try and win the current board, then try and block opponent
-class WinThenBlockStrat():
-    """docstring for ClassName"""
-    def __init__(self):
-        return None
-    
-    def decide_move(self, game, verbose = False):
-        if verbose:
-            print('We will try and win the current board.')
-        # first try and win the current game
-        result = win_any_board(game)
-        if result is not None:
-            return result
-        # second try and block the opponent on a board they are about to win
-        result = block_opponent(game)
-        if result is not None:
-            return result
-        # if neither of the above is satisfied then we move randomly
-        return make_move_random(game)
-
-    def __str__(self):
-        return 'Win then Block'
-
 
 # firs try and win the current board then move somewhere randomly that is not the center
 class WinThenNoCenterStrat():
@@ -125,26 +105,6 @@ class WinThenNoCenterStrat():
 
     def __str__(self):
         return 'Win then No Center'
-
-
-# try and move only to center and corners on boards if possible
-class NoCornersStrat():
-    """docstring for ClassName"""
-    def __init__(self):
-        return None
-    
-    def decide_move(self, game, verbose = False):
-        if verbose:
-            print('Not choosing middle if possible')
-        # first try and win the current board
-        result = take_middles_and_center(game)
-        if result is not None:
-            return result
-        # then try and move to the center
-        return make_move_random(game)
-
-    def __str__(self):
-        return 'No Corners'
 
 
 # first try and win a board then focus on no corners
@@ -169,6 +129,145 @@ class WinThenNoCornersStrat():
 
     def __str__(self):
         return 'Win then No Corners'
+
+################### Stategies that try to block
+
+
+# if your opponent is about to win, block them
+class BlockOpponentStrat():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and block the opponents win.')
+        # first try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # if that doesnt work then simply choose randomly
+        return make_move_random(game)
+
+    def __str__(self):
+        return 'Block'
+
+
+class BlockThenNoCenter():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and block the opponents win.')
+        # first try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # if that doesnt work then simply choose randomly
+        return make_move_center(game)
+
+    def __str__(self):
+        return 'Block No Center'
+
+
+class BlockThenNoCorners():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and block the opponents win.')
+        # first try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # now move to the middle or center if available
+        result = take_middles_and_center(game)
+        if result is not None:
+            return result
+        # then try and move to the center
+        return make_move_random(game)
+
+    def __str__(self):
+        return 'Block No Corners'
+
+
+############## Stategies that try to win and block
+
+# first try and win the current board, then try and block opponent
+class WinThenBlockStrat():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and win the current board.')
+        # first try and win the current game
+        result = win_any_board(game)
+        if result is not None:
+            return result
+        # second try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # if neither of the above is satisfied then we move randomly
+        return make_move_random(game)
+
+    def __str__(self):
+        return 'Win then Block'
+
+class WinThenBlockNoCornersStrat():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and win the current board.')
+        # first try and win the current game
+        result = win_any_board(game)
+        if result is not None:
+            return result
+        # second try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # then try and move to the middle or center
+        result = take_middles_and_center(game)
+        if result is not None:
+            return result
+        # if not available then move randomly
+        return make_move_random(game)
+
+    def __str__(self):
+        return 'Win then Block No Corners'
+
+class WinThenBlockNoCenterStrat():
+    """docstring for ClassName"""
+    def __init__(self):
+        return None
+    
+    def decide_move(self, game, verbose = False):
+        if verbose:
+            print('We will try and win the current board.')
+        # first try and win the current game
+        result = win_any_board(game)
+        if result is not None:
+            return result
+        # second try and block the opponent on a board they are about to win
+        result = block_opponent(game)
+        if result is not None:
+            return result
+        # then try and move to the middle or center
+        return make_move_center(game)
+
+    def __str__(self):
+        return 'Win then Block No Center'
+
 
 
 
