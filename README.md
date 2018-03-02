@@ -212,6 +212,16 @@ Mean of ties is:  0.207424
 StdDev of ties is:  0.00362836381858
 ```
 
+For: p0=WinThenBlockNoCorners, p1=Win
+```
+Mean of  Win then Block No Corners  wins is:  0.250878
+StdDev of  Win then Block No Corners  wins is:  0.00452308699894
+Mean of  Win Board  wins is:  0.651049
+StdDev of  Win then Block No Corners  wins is:  0.00455276827875
+Mean of ties is:  0.098073
+StdDev of ties is:  0.00297599915995
+```
+
 ###### Top Strategies against eachother
 
 For p0=winblocknocenter, p1=win
