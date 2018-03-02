@@ -148,3 +148,15 @@ StdDev of  Win Board  wins is:  0.0046335390362
 Mean of ties is:  0.105607
 StdDev of ties is:  0.00290135330493
 ```
+
+###### Advanced Winning Strategies vs. Advanced Winning Strategies
+
+For: p0=WinThenBlockNoCornersStrat, p1=WinThenBlockStrat
+```
+Mean of  Win then Block No Corners  wins is:  0.154532
+StdDev of  Win then Block No Corners  wins is:  0.00379085425729
+Mean of  Win then Block  wins is:  0.638044
+StdDev of  Win then Block No Corners  wins is:  0.00456187066893
+Mean of ties is:  0.207424
+StdDev of ties is:  0.00362836381858
+```
